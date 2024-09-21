@@ -3,6 +3,7 @@ package com.example.eventnest.api
 import com.example.eventnest.model.Event
 import com.example.eventnest.model.LoginRequest
 import com.example.eventnest.model.LoginResponse
+import com.example.eventnest.model.User
 import retrofit2.Response
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -23,6 +24,9 @@ interface ApiService {
     @GET("events")
     suspend fun getAllEvents(): List<Event>
 
+
     @POST("/users/login")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
+    @GET("/users/{id}")
+    suspend fun getUserById(@Path("id") userId: Long): Response<User>
 }

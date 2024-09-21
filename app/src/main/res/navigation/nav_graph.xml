@@ -14,8 +14,11 @@
         <action
             android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
-    </fragment>
 
+<!--        <action-->
+<!--            android:id="@+id/action_eventsFragment_to_eventPassFragment"-->
+<!--            app:destination="@id/eventPassFragment" />-->
+    </fragment>
 
     <fragment
         android:id="@+id/eventDetailsFragment"
@@ -32,15 +35,26 @@
         android:id="@+id/profileFragment"
         android:name="com.example.eventnest.fragment.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
+
         <action
-            android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
-            app:destination="@id/eventDetailsFragment" />
+            android:id="@+id/action_profileFragment_to_eventPassFragment"
+            app:destination="@id/eventPassFragment" />
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/notificationsFragment"-->
-<!--        android:name="com.example.eventnest.fragment.NotificationFragment"-->
-<!--        android:label="Notifications"-->
-<!--        tools:layout="@layout/fragment_notifications" />-->
+    <fragment
+        android:id="@+id/eventPassFragment"
+        android:name="com.example.eventnest.fragment.EventPassFragment"
+        android:label="Event Pass">
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.example.eventnest.model.Event" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="registrationNumber"
+            app:argType="string" />
+
+    </fragment>
 </navigation>

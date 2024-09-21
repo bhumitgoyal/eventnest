@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventnest.Adapters.EventAdapter
+import com.example.eventnest.Adapters.EventPassAdapter
 import com.example.eventnest.R
 import com.example.eventnest.api.RetrofitInstance
 import com.example.eventnest.model.Event
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var eventAdapter: EventAdapter
+    private lateinit var eventAdapter: EventPassAdapter
     private var userId: Long = 0
 
     override fun onCreateView(
@@ -36,7 +37,7 @@ class ProfileFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize the adapter with an empty list initially
-        eventAdapter = EventAdapter(emptyList(), findNavController())
+        eventAdapter = EventPassAdapter(emptyList(), "bhumit","Sex",findNavController())
         recyclerView.adapter = eventAdapter
 
         // Load registered events for the user
@@ -52,7 +53,7 @@ class ProfileFragment : Fragment() {
                 val events = RetrofitInstance.api.getUserRegisteredEvents(userId)
 
                 // Update the adapter with the fetched events
-                eventAdapter.updateEvents(events)
+                eventAdapter.updateEvents(events.toList())
             } catch (e: Exception) {
                 // Handle the error (e.g., show a Toast or log it)
                 e.printStackTrace() // Log the error for debugging
