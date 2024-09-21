@@ -4,28 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/eventsFragment">
+
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.example.eventnest.fragment.EventFragment"
         android:label="Events"
         tools:layout="@layout/fragment_event">
 
-        <!-- Action to navigate to EventDetailsFragment -->
         <action
             android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
-
     </fragment>
+
+
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.example.eventnest.fragment.EventDetailsFragment"
         android:label="Event Details"
-        tools:layout="@layout/fragment_event_details"> <!-- Ensure this layout exists -->
+        tools:layout="@layout/fragment_event_details">
 
-        <!-- If Event is Parcelable, keep this; otherwise, change to a simple type -->
         <argument
             android:name="selectedEvent"
             app:argType="com.example.eventnest.model.Event" />
     </fragment>
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.eventnest.fragment.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/notificationsFragment"-->
+<!--        android:name="com.example.eventnest.fragment.NotificationFragment"-->
+<!--        android:label="Notifications"-->
+<!--        tools:layout="@layout/fragment_notifications" />-->
 </navigation>

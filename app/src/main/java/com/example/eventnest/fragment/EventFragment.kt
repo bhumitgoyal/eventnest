@@ -15,32 +15,25 @@ import com.example.eventnest.api.RetrofitInstance
 import com.example.eventnest.model.Event
 import kotlinx.coroutines.launch
 
-
 class EventFragment : Fragment() {
-    private var userId: Long = 0
-
     private lateinit var eventAdapter: EventAdapter
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_event, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_events)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        eventAdapter = EventAdapter(getDummyEvents())
+        eventAdapter = EventAdapter(getDummyEvents(), findNavController()) // Pass NavController here
         recyclerView.adapter = eventAdapter
 
         fetchEvents()
 
-
         return view
     }
+
     private fun getDummyEvents(): List<Event> {
         return listOf(
             Event(id = 1, name = "Event 1", clubName = "Club A", organizerClub = "Organizer A", location = "Location A", startTime = "2024-09-21T10:00:00", endTime = "2024-09-21T12:00:00"),
@@ -48,12 +41,13 @@ class EventFragment : Fragment() {
             Event(id = 3, name = "Event 3", clubName = "Club C", organizerClub = "Organizer C", location = "Location C", startTime = "2024-09-23T10:00:00", endTime = "2024-09-23T12:00:00")
         )
     }
+
+
     private fun fetchEvents() {
         lifecycleScope.launch {
             try {
                 // Fetch events from the API
                 val events = RetrofitInstance.api.getAllEvents()
-
                 // Update the adapter with the fetched events
                 eventAdapter.updateEvents(events.toSet())
             } catch (e: Exception) {
@@ -62,7 +56,4 @@ class EventFragment : Fragment() {
             }
         }
     }
-
-
-
 }

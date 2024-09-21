@@ -10,8 +10,8 @@ import com.example.eventnest.R
 
 class EventDetailsFragment : Fragment() {
 
-
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -24,10 +24,9 @@ class EventDetailsFragment : Fragment() {
         val eventDescriptionTextView = view.findViewById<TextView>(R.id.tv_event_description)
 
         eventNameTextView.text = event.name
+        eventDateTextView.text = event.startTime // Update as needed
+        eventDescriptionTextView.text = event.location // Update as needed
 
-        // Inflate the layout for this fragment
         return view
     }
-
-
 }

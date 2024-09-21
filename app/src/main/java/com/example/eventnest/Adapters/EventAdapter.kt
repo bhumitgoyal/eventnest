@@ -1,20 +1,24 @@
 package com.example.eventnest.Adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavController
 import com.example.eventnest.R
-import com.example.eventnest.fragment.EventDetailsFragment
+import com.example.eventnest.fragment.EventFragmentDirections
 import com.example.eventnest.model.Event
 
-class EventAdapter(private var events: List<Event>) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+class EventAdapter(
+    private var events: List<Event>,
+    private val navController: NavController
+) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
+    // Update events list
     fun updateEvents(newEvents: Set<Event>) {
         events = newEvents.toList()
-        notifyDataSetChanged() // Notify the adapter to refresh the data
+        notifyDataSetChanged()
     }
 
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,13 +26,16 @@ class EventAdapter(private var events: List<Event>) : RecyclerView.Adapter<Event
 
         init {
             itemView.setOnClickListener {
-                val context = itemView.context
-                val intent = Intent(context, EventDetailsFragment::class.java)
-                intent.putExtra("EVENT", events[adapterPosition]) // Pass the event object
-                context.startActivity(intent)
+                // Ensure that the adapter position is valid before accessing the events list
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val action = EventFragmentDirections.actionEventsFragmentToEventDetailsFragment(events[position])
+                    navController.navigate(action)
+                }
             }
         }
 
+        // Bind data to views
         fun bind(event: Event) {
             eventNameTextView.text = event.name
         }
