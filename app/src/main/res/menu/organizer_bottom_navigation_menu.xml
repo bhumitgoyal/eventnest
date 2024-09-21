@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_view_events"
+        android:icon="@drawable/timeline_events"
+        android:title="View Events" />
+    <item
+        android:id="@+id/fragment_create_event"
+        android:icon="@drawable/add"
+        android:title="Create Event" />
+</menu>
